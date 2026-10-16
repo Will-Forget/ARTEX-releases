@@ -1,0 +1,15 @@
+name: Sync Releases
+on:
+  schedule:
+    - cron: '0 */12 * * *' # 每 12 小时同步一次
+  workflow_dispatch:
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone Releases
+        uses: andrewthetechie/gha-clone-releases@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          src_repo: RuoJi6/ARTEX
+          copy_assets: true # 关键：同步 Release 中的附件文件
